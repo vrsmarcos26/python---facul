@@ -10,7 +10,8 @@ CREATE TABLE MUNICIPIO (
     nome VARCHAR(255) NOT NULL,
     populacao INT,
     id_estado INT,
-    FOREIGN KEY (id_estado) REFERENCES ESTADO(id_estado)
+    FOREIGN KEY (id_estado) REFERENCES ESTADO(id_estado),
+    id_estado PRIMARY KEY
 );
 
 -- Pessoa (Cliente)
@@ -40,7 +41,8 @@ CREATE TABLE HISTORICO_TAXA_RECUPERACAO (
     id_municipio INT,
     Data DATE,
     porcentagem_infectados DECIMAL(5, 2),
-    FOREIGN KEY (id_municipio) REFERENCES MUNICIPIO(id_municipio)
+    FOREIGN KEY (id_municipio) REFERENCES MUNICIPIO(id_municipio),
+    id_municipio PRIMARY KEY
 );
 
 -- Vacina
@@ -69,7 +71,7 @@ CREATE TABLE VACINA_TIPO (
 );
 
 -- Administração de Vacina
-CREATE TABLE Administracao_Vacina (
+CREATE TABLE ADMINISTRACAO_VACINA (
     id_administracao INT PRIMARY KEY,
     id_pessoa INT,
     id_vacina INT,
