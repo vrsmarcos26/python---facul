@@ -9,7 +9,7 @@ CREATE TABLE MUNICIPIO (
     id_municipio INT PRIMARY KEY,
     nome VARCHAR(255) NOT NULL,
     populacao INT,
-    id_estado INT,
+    id_estado INT PRIMARY KEY,
     FOREIGN KEY (id_estado) REFERENCES ESTADO(id_estado)
 );
 
@@ -24,12 +24,11 @@ CREATE TABLE PESSOA (
 
 -- Teste
 CREATE TABLE TESTE (
-    id_teste INT,
+    id_teste INT PRIMARY KEY,
     cpf INT,
     data DATE,
     resultado VARCHAR(50),
     id_municipio INT,
-    PRIMARY KEY (id_teste, cpf),
     FOREIGN KEY (cpf) REFERENCES PESSOA(cpf),
     FOREIGN KEY (id_municipio) REFERENCES MUNICIPIO(id_municipio)
 );
@@ -63,22 +62,24 @@ CREATE TABLE VACINA_TIPO (
 
 -- Administração de Vacina
 CREATE TABLE ADMINISTRACAO_VACINA (
-    id_administracao INT PRIMARY KEY,
+    id_administracao INT,
     cpf INT,
     id_vacina INT,
     data_administracao DATE,
     doses_administradas INT,
     FOREIGN KEY (cpf) REFERENCES PESSOA(cpf),
     FOREIGN KEY (id_vacina) REFERENCES VACINA(id_vacina)
+    PRIMARY KEY (cpf, id_vacina, id_administracao),
 );
 
 -- Aquisição
 CREATE TABLE AQUISICAO (
-    id_aquisicao INT PRIMARY KEY,
+    id_aquisicao INT,
     id_municipio INT,
     id_vacina INT,
     data_aquisicao DATE,
     quantidade INT,
     FOREIGN KEY (id_municipio) REFERENCES MUNICIPIO(id_municipio),
     FOREIGN KEY (id_vacina) REFERENCES VACINA(id_vacina)
+    PRIMARY KEY (id_aquisicao, id_municipio, id_vacina),
 );
