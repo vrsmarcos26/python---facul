@@ -21,13 +21,12 @@ CREATE TABLE PESSOA (
     data_nascimento DATE,
     rg int,
     sexo CHAR(1),
-    Status VARCHAR(50)
 );
 
 -- Teste
 CREATE TABLE TESTE (
     id_teste INT PRIMARY KEY,
-    id_pessoa INT,
+    cpf INT,
     Data DATE,
     resultado VARCHAR(50),
     id_municipio INT,
@@ -55,18 +54,10 @@ CREATE TABLE VACINA (
 );
 
 -- Tipo de Vacina
-CREATE TABLE TIPO_VACINA (
-    id INT,
-    funcao VARCHAR(255),
-    doses INT
-);
-
--- Associação Vacina-Tipo de Vacina
 CREATE TABLE VACINA_TIPO (
     id_vacina INT,
     id_tipo INT,
     FOREIGN KEY (id_vacina) REFERENCES VACINA(id_vacina),
-    FOREIGN KEY (id_tipo) REFERENCES TipoVacina(id),
     PRIMARY KEY (id_vacina, id_tipo)
 );
 
