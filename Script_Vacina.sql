@@ -10,8 +10,7 @@ CREATE TABLE MUNICIPIO (
     nome VARCHAR(255) NOT NULL,
     populacao INT,
     id_estado INT,
-    FOREIGN KEY (id_estado) REFERENCES ESTADO(id_estado),
-    id_estado PRIMARY KEY
+    FOREIGN KEY (id_estado) REFERENCES ESTADO(id_estado)
 );
 
 -- Pessoa (Cliente)
@@ -19,29 +18,30 @@ CREATE TABLE PESSOA (
     cpf INT PRIMARY KEY,
     nome_completo VARCHAR(255) NOT NULL,
     data_nascimento DATE,
-    rg int,
-    sexo CHAR(1),
+    rg INT,
+    sexo CHAR(1)
 );
 
 -- Teste
 CREATE TABLE TESTE (
-    id_teste INT PRIMARY KEY,
+    id_teste INT,
     cpf INT,
-    Data DATE,
+    data DATE,
     resultado VARCHAR(50),
     id_municipio INT,
-    FOREIGN KEY (id_pessoa) REFERENCES PESSOA(cpf),
+    PRIMARY KEY (id_teste, cpf),
+    FOREIGN KEY (cpf) REFERENCES PESSOA(cpf),
     FOREIGN KEY (id_municipio) REFERENCES MUNICIPIO(id_municipio)
 );
 
 -- Histórico de Taxas
 CREATE TABLE HISTORICO_TAXA_RECUPERACAO (
-    id_data INT PRIMARY KEY,
+    id_data INT,
     id_municipio INT,
-    Data DATE,
+    data DATE,
     porcentagem_infectados DECIMAL(5, 2),
-    FOREIGN KEY (id_municipio) REFERENCES MUNICIPIO(id_municipio),
-    id_municipio PRIMARY KEY
+    PRIMARY KEY (id_data, id_municipio),
+    FOREIGN KEY (id_municipio) REFERENCES MUNICIPIO(id_municipio)
 );
 
 -- Vacina
@@ -64,11 +64,11 @@ CREATE TABLE VACINA_TIPO (
 -- Administração de Vacina
 CREATE TABLE ADMINISTRACAO_VACINA (
     id_administracao INT PRIMARY KEY,
-    id_pessoa INT,
+    cpf INT,
     id_vacina INT,
     data_administracao DATE,
     doses_administradas INT,
-    FOREIGN KEY (id_pessoa) REFERENCES PESSOA(id_pessoa),
+    FOREIGN KEY (cpf) REFERENCES PESSOA(cpf),
     FOREIGN KEY (id_vacina) REFERENCES VACINA(id_vacina)
 );
 
