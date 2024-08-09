@@ -32,6 +32,13 @@ um carro e de uma moto.
    construtor com os três atributos comuns e o atributo cilindradas. E os métodos get e set FEITO
 7- Crie duas instâncias (objetos) da classe Moto com quatro e três argumentos.
    Teste FEITO
+8- Utilizr o método vars() para acessar os atributos de Carro e Moto num dicionário.
+    Sintaxe: print(vars(objeto))
+9- Use o método  __dict__ para acessar os atributos de Carro e Moto num dicionário.
+    Sintaxe: print(objeto.__dict__)
+10- Método de acrescentar
+11- Método de condição
+
 
 """
 
@@ -55,8 +62,20 @@ class Veiculo(object):  # Superclasse
         return self.km
     def set_km(self, nova_km):
         self.km = nova_km
+    def acrescentar_valor(self,add_valor):
+        self.valor = self.valor + add_valor
+        return self.valor
+    def condição(self):
+        if self.km == 0:
+            return "Vaiculo NOVO"
+        elif self.km > 0 & self.km <= 2000:
+            return "Veiculo semi-novo"
+        else:
+            return "Veiculo usado"
+
     def __str__(self):
         return f'Veículo (valor= {self.valor}, modelo = {self.modelo}, km= {self.km})'
+    
 
 
 # O nome de classe começa com letra maiúscula e as outras letras minúsculas.
@@ -87,7 +106,6 @@ class Moto(Veiculo):
         super_str = super().__str__()
         return f'{super_str}, cilindrada = {self.cilindradas}'
 
-
 if __name__ == '__main__':                      # Atalho: main
     v1 = Veiculo (100000.00, "Yaris", 20000)
     print("- Veiculo 1:", v1)
@@ -95,6 +113,7 @@ if __name__ == '__main__':                      # Atalho: main
     print('Modelo:', v1.get_modelo())
     v1.set_valor(110000.00)
     print(f'Valor alterado: {v1.get_valor()} \n')
+    
 
     c1 = Carro(99000.00, "Civic", 1000, 4)  # Instancia objeto da subclasse
     print('- Carro 1:\n', c1)               # print(c1.__str__())
@@ -132,9 +151,13 @@ if __name__ == '__main__':                      # Atalho: main
     m2 = Moto(4000.00, "Harley", 300)         # Três argumentos
     print(f"- Moto 2:\n {m2}")
     print(f"- Valor: {m2.get_valor()}")
+    m2.acrescentar_valor(360.00)
+    print(f"- Novo Valor: {m2.get_valor()}")
     print(f"- Modelo: {m2.get_modelo()}")
     print(f"- KM: {m2.get_km()}")
+    print(m2.condição())
     m2.set_km(200)
     print(f"Km alterado: {m2.get_km()}")
-
-
+    print(m2.__dict__)
+    print(vars(m2))
+    
